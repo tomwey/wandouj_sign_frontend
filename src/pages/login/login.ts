@@ -7,6 +7,7 @@ import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 // import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
+import { HomePage } from '../home/home';
 // import { TabsPage } from '../tabs/tabs';
 // import { SettingPage } from '../setting/setting';
 // import { Utils } from '../../provider/Utils';
@@ -46,7 +47,7 @@ export class LoginPage {
       mobile_field: "mobile",
       seconds: 59,
       get_code_text: "获取验证码",
-      code_type: 3
+      code_type: 5
     }
   ];
 
@@ -78,11 +79,12 @@ export class LoginPage {
       .then(data => {
         console.log(data);
         // this.checkProfile();
-        if (!data['pay_account']) {
-          this.app.getRootNavs()[0].setRoot('ProfilePage', { profile: data });
-        } else {
-          this.app.getRootNavs()[0].setRoot(TabsPage);
-        }
+        // if (!data['pay_account']) {
+        //   this.app.getRootNavs()[0].setRoot('ProfilePage', { profile: data });
+        // } else {
+        //   this.app.getRootNavs()[0].setRoot(TabsPage);
+        // }
+        this.app.getRootNavs()[0].setRoot(HomePage);
       })
       .catch(error => {
         this.tools.showToast(error);

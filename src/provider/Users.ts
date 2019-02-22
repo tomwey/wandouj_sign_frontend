@@ -55,7 +55,55 @@ export class Users {
     GetUserHomeData() {
         return new Promise((resolve, reject) => {
             this.token().then(token => {
-                this.api.GET('channel/portal/home', { token: token, key: this._getKeyParam() }, "加载中...", true)
+                this.api.GET('provider/portal/home', { token: token, key: this._getKeyParam() }, "加载中...", false)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+                .catch(error => { });
+            // 
+        });
+    }
+
+    GetCommCompanies() {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.GET('filter/companies', { token: token, type: 3 }, "加载中...", true)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+                .catch(error => { });
+            // 
+        });
+    }
+
+    GetCommJobs(comp_id) {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.GET('filter/jobs', { token: token, type: 3, comp_id: comp_id }, "加载中...", true)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+                .catch(error => { });
+            // 
+        });
+    }
+
+    GetApplies(date, state, merch_id, job_id) {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.GET('provider/portal/users', { token: token, state: state, date: date, comp_id: merch_id, job_id: job_id }, "加载中...", true)
                     .then(res => {
                         resolve(res);
                     })
@@ -562,7 +610,7 @@ export class Users {
 
     Login(mobile, code) {
         return new Promise((resolve, reject) => {
-            this.api.POST('channel/portal/login', {
+            this.api.POST('provider/portal/login', {
                 mobile: mobile,
                 code: code,
                 key: this._getKeyParam()

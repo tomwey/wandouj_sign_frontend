@@ -12,62 +12,44 @@
     </ion-refresher-content>
   </ion-refresher> -->
 
-  <div class="caption" *ngIf="!!channel">
+  <div class="caption" *ngIf="!!contact">
     <div class="channel">
-      <ion-item tappable (click)="viewProfile();">
-        <ion-avatar item-left>
-          <img [src]="channel.avatar || 'assets/imgs/default_avatar.png'">
-        </ion-avatar>
-        <h2 class="name">{{channel.name || 'ID: ' + channel.id}}</h2>
-        <p class="mobile">登录手机: {{channel.mobile}}</p>
-        <ion-icon name="ios-arrow-forward-outline" item-right></ion-icon>
-      </ion-item>
       <ion-item>
-        <h2 class="name">我的收入：{{channel.total_money}}</h2>
-        <button item-right ion-button (click)="viewSalary()">明细</button>
+        <ion-avatar item-left>
+          <img [src]="contact.avatar || 'assets/imgs/default_avatar.png'">
+        </ion-avatar>
+        <h2 class="name">ID: {{contact.id}}</h2>
+        <p class="mobile">登录手机: {{contact.mobile}}</p>
       </ion-item>
     </div>
-    <div class="earn-box">
-
-    </div>
-  </div>
-
-  <div class="companies box">
-    <h2 class="title">人力公司推荐</h2>
-    <div class="company-list">
-      <ion-list>
-        <ion-item *ngFor="let comp of companies" tappable (click)="viewJobs(comp);">
-          <ion-avatar item-left>
-            <img [src]="comp.logo">
-          </ion-avatar>
-          <h2 class="name">{{comp.alias_name || comp.name}}</h2>
-          <p class="comp-name">{{comp.name}}</p>
-          <button ion-button small outline (click)="copy($event,comp);">复制链接</button>
-          <button ion-button small outline (click)="share($event,comp);">分享二维码</button>
-        </ion-item>
-      </ion-list>
-    </div>
-  </div>
-  <div class="splitor"></div>
-  <div class="box children" *ngIf="channel && channel.has_child">
-    <h2 class="title">下级代理<span class="new-channel" tappable (click)="newItem()">
-        <ion-icon name="ios-add-outline"></ion-icon> 新增
-      </span></h2>
-    <div class="empty-box" *ngIf="children.length === 0">暂无下级代理</div>
-    <div class="child-list">
-      <ion-list>
-        <ion-item *ngFor="let child of children">
-          <p class="child-id">ID {{child.cid}}</p>
-          <h2 class="name">{{child.name}}</h2>
-          <p class="mobile">登录手机: {{child.mobile}}</p>
-
-          <div item-right>
-            <button ion-button small clear (click)="editItem(child)">编辑</button><br>
-            <button ion-button small clear color="danger" (click)="deleteItem(child)">删除</button>
+    <div class="today-stats">
+      <ion-row>
+        <ion-col col-4>
+          <div class="stat">
+            <div class="value">{{contact.qd_count}}</div>
+            <div class="label">今日待签到</div>
           </div>
-        </ion-item>
-      </ion-list>
+        </ion-col>
+        <ion-col col-4>
+          <div class="stat">
+            <div class="value">{{contact.qd_ed_count}}</div>
+            <div class="label">今日已签到</div>
+          </div>
+        </ion-col>
+        <ion-col col-4>
+          <div class="stat">
+            <div class="value">{{contact.qt_ed_count}}</div>
+            <div class="label">今日已签退</div>
+          </div>
+        </ion-col>
+      </ion-row>
     </div>
   </div>
+
+  <div class="applies">
+    <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
+  </div>
+
+  <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
 
 </ion-content>
