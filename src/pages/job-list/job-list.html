@@ -1,0 +1,54 @@
+<!--
+  Generated template for the JobListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar color="primary">
+    <ion-title>兼职列表</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="empty-error-box" *ngIf="!!error">
+    {{error}}
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let item of jobs">
+      <ion-row class="job">
+        <ion-col col-6>
+          <h2>{{item.name}}</h2>
+          <p>{{item.project_name}}</p>
+          <p>
+            <ion-icon name="ios-calendar-outline"></ion-icon>{{item.work_dates}}
+          </p>
+          <p>
+            <ion-icon name="ios-alarm-outline"></ion-icon>{{item.work_times}}
+          </p>
+          <p text-wrap>
+            <ion-icon name="ios-pin-outline"></ion-icon> {{item.address}}
+          </p>
+        </ion-col>
+        <ion-col col-6 style="text-align: right;">
+          <p>需要人数: {{item.need_total}}</p>
+          <p>已报名: {{item.joined_total}}</p>
+          <p>招人价格: {{item.price}}{{item.unit}}</p>
+          <ion-badge color="{{item.opened ? 'primary' : 'danger'}}">{{item.opened ? "已上线" : "未上线"}}</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-6>
+      <button ion-button outline block (click)="copy();">复制链接</button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button block (click)="share();">分享二维码</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
