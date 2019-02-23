@@ -83,7 +83,7 @@ page-home {
                     
                 }
                 .mobile {
-                    padding-right: 10px;
+                    padding-right: 6px;
                 }
                 .sex-icon {
                     vertical-align: -6px;
@@ -120,6 +120,25 @@ page-home {
                 .name,.time{
                     font-size: 12px;
                     color: #666;
+                }
+
+                .name {
+                    max-width: 75%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .time {
+                    position: relative;
+                    .right-btn {
+                        position: absolute;
+                        right: 5px;
+                        top: -16px;
+                    }
+                    ion-icon {
+                        vertical-align: -1px;
+                    }
                 }
             }
 

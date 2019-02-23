@@ -48,6 +48,7 @@
 
   <div class="applies">
     <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
+    <!-- <ion-searchbar></ion-searchbar> -->
   </div>
 
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
@@ -69,14 +70,18 @@
           </div>
           <div class="job">
             <p class="name">{{item.job.name}}</p>
-            <p class="time">工作时间: {{item.work_time_range}}</p>
+            <p class="time">
+              <ion-icon name="ios-time-outline"></ion-icon> {{item.work_time_range}}<button ion-button outline small
+                (click)="newCheckin(item);" class="right-btn">补签</button>
+            </p>
           </div>
           <div class="apply-info">
             <ion-row>
               <ion-col col-8>
                 <div class="time-box">
                   <p class="time">签到时间: {{item.checkin_time || "还未签到"}}<span *ngIf="item.is_late"
-                      class="be-late">迟到</span></p>
+                      class="be-late">迟到</span>
+                  </p>
                   <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
                       class="leave-early">早退</span></p>
                 </div>

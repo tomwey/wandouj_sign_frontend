@@ -168,6 +168,11 @@ export class HomePage {
 
   }
 
+  // 补签
+  newCheckin(item) {
+
+  }
+
   applies: any = [];
 
   filterItems: any = [
