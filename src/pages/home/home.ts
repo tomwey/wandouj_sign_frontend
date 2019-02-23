@@ -160,6 +160,14 @@ export class HomePage {
       });
   }
 
+  checkin(item) {
+
+  }
+
+  checkout(item) {
+
+  }
+
   applies: any = [];
 
   filterItems: any = [

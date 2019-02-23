@@ -22,7 +22,7 @@ import { iOSFixedScrollFreeze } from '../provider/iOSFixedScrollFreeze';
 import { PipesModule } from '../pipes/pipes.module';
 import { ComponentsModule } from '../components/components.module';
 import { TabsPage } from '../pages/tabs/tabs';
-import { jsClipboard } from '../provider/jsClipboard';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { jsClipboard } from '../provider/jsClipboard';
       backButtonText: '',
     }),
     PipesModule,
-    ComponentsModule
+    ComponentsModule,
+    VirtualScrollerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +62,7 @@ import { jsClipboard } from '../provider/jsClipboard';
     ApiService,
     AppManager,
     iOSFixedScrollFreeze,
-    jsClipboard,
+    // jsClipboard,
   ]
 })
 export class AppModule { }
