@@ -68,7 +68,7 @@ page-home {
             .base-info {
                 font-size: 0;
                 color: #333;
-                .name,.mobile,.sex-icon,.age {
+                .name,.mobile,.idcard {
                     font-size: 14px;
                     line-height: 14px;
                     vertical-align: middle;
@@ -87,6 +87,17 @@ page-home {
                     }
                 }
                 
+                .other {
+                    margin-top: 5px;
+                    // font-size: 12px;
+                    .badge-ios {
+                        font-size: 12px;
+                        margin-right: 5px;
+                        background: #f2f2f2;
+                        color: #666;
+                        font-weight: normal;
+                    }
+                }
             }
             .idcard {
                 font-size: 14px;
