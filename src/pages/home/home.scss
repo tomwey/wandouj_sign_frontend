@@ -70,8 +70,9 @@ page-home {
                 color: #333;
                 .name,.mobile,.idcard {
                     font-size: 14px;
-                    line-height: 14px;
+                    line-height: 18px;
                     vertical-align: middle;
+                    font-weight: 500;
                 }
                 .name {
                     display: inline-block;
@@ -79,6 +80,7 @@ page-home {
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
+                    
                 }
                 .mobile {
                     padding-right: 10px;
@@ -95,7 +97,7 @@ page-home {
                 }
                 
                 .other {
-                    margin-top: 8px;
+                    margin-top: 5px;
                     // font-size: 12px;
                     .badge-ios {
                         font-size: 12px;
