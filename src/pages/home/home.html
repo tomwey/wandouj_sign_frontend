@@ -52,7 +52,7 @@
 
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
   <div class="apply-users">
-    <virtual-scroller #scroll [items]="applies" [childHeight]="151">
+    <virtual-scroller #scroll [items]="applies" [childHeight]="154">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
           <div class="base-info">
@@ -60,12 +60,6 @@
               <span class="mobile">{{item.user.mobile}}</span>
               <span class="idcard" *ngIf="!!item.user.idcard">{{item.user.idcard}}</span>
             </div>
-            <!-- <span class="sex-icon">
-              <ion-icon [class.male]="item.user.sex == '男'" [class.female]="item.user.sex == '女'"
-                name="{{item.user.sex == '男' ? 'ios-male-outline' : 'ios-female-outline'}}">
-              </ion-icon>
-              </span> -->
-            <!-- <span class="age">{{item.user.age}}岁</span> -->
             <div class="other">
               <ion-badge>{{item.user.sex}}</ion-badge>
               <ion-badge>{{item.user.age}}岁</ion-badge>
@@ -73,12 +67,10 @@
               <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
             </div>
           </div>
-          <!-- <p class="idcard" *ngIf="!!item.user.idcard">身份证 {{item.user.idcard}}</p> -->
           <div class="job">
             <p class="name">{{item.job.name}}</p>
             <p class="time">工作时间: {{item.work_time_range}}</p>
           </div>
-
           <div class="apply-info">
             <ion-row>
               <ion-col col-8>

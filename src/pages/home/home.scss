@@ -73,8 +73,15 @@ page-home {
                     line-height: 14px;
                     vertical-align: middle;
                 }
+                .name {
+                    display: inline-block;
+                    width: 55px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
                 .mobile {
-                    padding: 0 5px;
+                    padding-right: 10px;
                 }
                 .sex-icon {
                     vertical-align: -6px;
@@ -88,7 +95,7 @@ page-home {
                 }
                 
                 .other {
-                    margin-top: 5px;
+                    margin-top: 8px;
                     // font-size: 12px;
                     .badge-ios {
                         font-size: 12px;
