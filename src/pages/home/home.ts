@@ -28,6 +28,12 @@ export class HomePage {
 
   error: any = null;
 
+  checkState: any = -1;
+
+  selectedUsers: any = [];
+
+  hasSelectAll: boolean = false;
+
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController,
@@ -46,6 +52,8 @@ export class HomePage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad HomePage');
     this.iosFixed.fixedScrollFreeze(this.content);
+
+    this.showOrHideToolbars();
 
     this.loadHomeData();
 
@@ -102,11 +110,11 @@ export class HomePage {
         },
         {
           label: '待签到',
-          value: 0
+          value: '0'
         },
         {
           label: '待签退',
-          value: 1
+          value: '1'
         },
         {
           label: '已签退',
@@ -140,7 +148,18 @@ export class HomePage {
 
   selectedFilterItem(item) {
     console.log(item);
+    this.showOrHideToolbars();
+
     this.loadApplies();
+  }
+
+  showOrHideToolbars() {
+    let state = (this.filterItems[1].value || {}).value || -1;
+    this.checkState = state;
+  }
+
+  handleCheck() {
+
   }
 
   loadApplies() {
@@ -161,16 +180,73 @@ export class HomePage {
   }
 
   checkin(item) {
-
+    this.users.HandleSign('checkin', item)
+      .then(data => {
+        this.tools.showToast("签到成功");
+        for (const key in item) {
+          if (item.hasOwnProperty(key)) {
+            item[key] = data['data'][key];
+          }
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || "服务器超时，请重试");
+      });
   }
 
   checkout(item) {
-
+    this.users.HandleSign('checkout', item)
+      .then(data => {
+        this.tools.showToast("签退成功");
+        for (const key in item) {
+          if (item.hasOwnProperty(key)) {
+            item[key] = data['data'][key];
+          }
+        }
+      })
+      .catch(error => {
+        this.tools.showToast(error.message || "服务器超时，请重试");
+      });
   }
 
-  // 补签
-  newCheckin(item) {
+  selectAll() {
+    this.hasSelectAll = !this.hasSelectAll;
 
+    if (this.hasSelectAll) {
+      let temp = [];
+      this.applies.forEach(item => {
+        item.cb_selected = true;
+        temp.push(item);
+      });
+      this.selectedUsers = temp;
+    } else {
+      this.selectedUsers = [];
+
+      this.applies.forEach(item => {
+        item.cb_selected = false;
+      });
+    }
+  }
+
+  formatCheckBtnText() {
+    return this.checkState == '0'
+      ? `签到${this.selectedUsers.length === 0 ? '' : ' (' + this.selectedUsers.length + ')'}`
+      : `签退${this.selectedUsers.length === 0 ? '' : ' (' + this.selectedUsers.length + ')'}`;
+  }
+
+  selectItem(item) {
+    item.cb_selected = !item.cb_selected;
+
+    if (item.cb_selected) {
+      this.selectedUsers.push(item);
+    } else {
+      const index = this.selectedUsers.indexOf(item);
+      if (index !== -1) {
+        this.selectedUsers.splice(index, 1);
+      }
+    }
+
+    this.hasSelectAll = this.selectedUsers.length === this.applies.length;
   }
 
   applies: any = [];
@@ -185,10 +261,10 @@ export class HomePage {
     {
       name: '签到状态',
       field: 'state',
-      value: {
-        label: "待签到",
-        value: "0"
-      },
+      // value: {
+      //   label: "待签到",
+      //   value: "0"
+      // },
       selectFunc: (item, callback) => {
         this.selectFilterItem(item, callback);
       }

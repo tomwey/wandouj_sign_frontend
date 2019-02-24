@@ -56,41 +56,38 @@
     <virtual-scroller #scroll [items]="applies" [childHeight]="155">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
-          <div class="base-info">
-            <div class="main"><span class="name">{{item.user.name}}</span>
-              <span class="mobile">{{item.user.mobile}}</span>
-              <span class="idcard" *ngIf="!!item.user.idcard">{{item.user.idcard}}</span>
+          <div item-left class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">
+            <span class="custom-checkbox" [class.has-selected]="hasSelectAll || item.cb_selected" tappable
+              (click)="selectItem(item);" *ngIf="checkState == '0' || checkState == '1'">
+              <ion-icon
+                name="{{(hasSelectAll || item.cb_selected) ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}">
+              </ion-icon>
+            </span>
+            <div class="base-info">
+              <div class="main"><span class="name">{{item.user.name}}</span>
+                <span class="mobile">{{item.user.mobile}}</span>
+                <span class="idcard" *ngIf="!!item.user.idcard">{{item.user.idcard}}</span>
+              </div>
+              <div class="other">
+                <ion-badge>{{item.user.sex}}</ion-badge>
+                <ion-badge>{{item.user.age}}岁</ion-badge>
+                <ion-badge *ngIf="!!item.user.college">{{item.user.college}}</ion-badge>
+                <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
+              </div>
             </div>
-            <div class="other">
-              <ion-badge>{{item.user.sex}}</ion-badge>
-              <ion-badge>{{item.user.age}}岁</ion-badge>
-              <ion-badge *ngIf="!!item.user.college">{{item.user.college}}</ion-badge>
-              <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
+            <div class="job">
+              <p class="name">{{item.job.name}}</p>
             </div>
-          </div>
-          <div class="job">
-            <p class="name">{{item.job.name}}</p>
-            <p class="time">
-              <ion-icon name="ios-time-outline"></ion-icon> {{item.work_time_range}}<button ion-button outline small
-                (click)="newCheckin(item);" color="gray" class="right-btn">补签</button>
-            </p>
-          </div>
-          <div class="apply-info">
-            <ion-row>
-              <ion-col col-8>
-                <div class="time-box">
-                  <p class="time">签到时间: {{item.checkin_time || "还未签到"}}<span *ngIf="item.is_late"
-                      class="be-late">迟到</span>
-                  </p>
-                  <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
-                      class="leave-early">早退</span></p>
-                </div>
-              </ion-col>
-              <ion-col col-4 style="text-align: right;">
-                <button ion-button small *ngIf="item.can_checkin" (click)="checkin(item)">签到</button>
-                <button ion-button small *ngIf="item.can_checkout" color="danger" (click)="checkout(item)">签退</button>
-              </ion-col>
-            </ion-row>
+            <div class="apply-info">
+              <div class="time-box">
+                <p class="time">签到时间: {{item.checkin_time || "还未签到"}}<span *ngIf="item.is_late"
+                    class="be-late">迟到</span>
+                </p>
+                <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
+                    class="leave-early">早退</span></p>
+              </div>
+
+            </div>
           </div>
         </ion-item>
       </div>
@@ -98,3 +95,18 @@
   </div>
 
 </ion-content>
+<ion-footer>
+  <div class="custom-toolbar" *ngIf="checkState == '0' || checkState == '1'">
+    <ion-row>
+      <ion-col col-3>
+        <span class="select-all" [class.selected]="hasSelectAll" tappable (click)="selectAll();">
+          <ion-icon name="{{hasSelectAll ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}"></ion-icon>全选
+        </span>
+      </ion-col>
+      <ion-col col-9 style="text-align: right;">
+        <span class="check-btn" [class.checkin]="checkState == '0'" [class.disabled]="selectedUsers.length === 0"
+          [class.checkout]="checkState == '1'" tappable (click)="handleCheck();">{{formatCheckBtnText()}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>
