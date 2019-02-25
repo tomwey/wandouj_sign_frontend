@@ -149,6 +149,22 @@ export class Users {
         });
     }
 
+    ApplyBatchCheck(ids, time, type) {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.POST('provider/portal/apply/batch_check', { token: token, ids: ids, time: time, type: type }, "正在提交", true)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+                .catch(error => { });
+            // 
+        });
+    }
+
     DeleteChannel(id) {
         return new Promise((resolve, reject) => {
             this.token().then(token => {

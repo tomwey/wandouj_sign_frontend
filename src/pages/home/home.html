@@ -96,7 +96,7 @@
 
 </ion-content>
 <ion-footer>
-  <div class="custom-toolbar" *ngIf="checkState == '0' || checkState == '1'">
+  <div class="custom-toolbar" *ngIf="(checkState == '0' || checkState == '1') && applies.length > 0">
     <ion-row>
       <ion-col col-3>
         <span class="select-all" [class.selected]="hasSelectAll" tappable (click)="selectAll();">
