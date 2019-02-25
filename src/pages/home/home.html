@@ -53,7 +53,7 @@
 
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
   <div class="apply-users">
-    <virtual-scroller #scroll [items]="applies" [childHeight]="155">
+    <virtual-scroller #scroll [items]="applies" [childHeight]="180">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
           <div item-left class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">
@@ -77,16 +77,20 @@
             </div>
             <div class="job">
               <p class="name">{{item.job.name}}</p>
+              <p class="project-name">{{item.job.project_name}}</p>
             </div>
+
             <div class="apply-info">
               <div class="time-box">
+                <p class="time">报名时间: {{item.apply_time || "还未签到"}}
+                </p>
+                <p class="time">工作时间: {{item.work_time_range}}</p>
                 <p class="time">签到时间: {{item.checkin_time || "还未签到"}}<span *ngIf="item.is_late"
                     class="be-late">迟到</span>
                 </p>
                 <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
                     class="leave-early">早退</span></p>
               </div>
-
             </div>
           </div>
         </ion-item>

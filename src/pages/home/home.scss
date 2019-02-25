@@ -117,28 +117,18 @@ page-home {
 
             .job  {
                 margin-top: 5px;
-                .name,.time{
+                .name, .project-name {
                     font-size: 12px;
-                    color: #666;
+                    margin: 0;
+                    padding: 0;
                 }
 
                 .name {
-                    max-width: 75%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                    color: #333;
                 }
-
-                .time {
-                    position: relative;
-                    .right-btn {
-                        position: absolute;
-                        right: 5px;
-                        top: -16px;
-                    }
-                    ion-icon {
-                        vertical-align: -1px;
-                    }
+                
+                .project-name {
+                    color: #999;
                 }
             }
 
@@ -147,7 +137,7 @@ page-home {
                     margin: 0;
                     padding: 0;
                 }
-                background: #f7f7f7;
+                background: rgba(247,246,246, 0.6);
                 padding: 5px;
                 margin-top: 5px;
                 .time {
@@ -241,5 +231,9 @@ page-home {
             }
         }
 
+    }
+
+    ion-footer {
+        height: 50px;
     }
 }
