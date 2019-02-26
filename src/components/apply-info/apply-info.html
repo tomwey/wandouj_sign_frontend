@@ -19,7 +19,8 @@
       <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
           class="leave-early">早退</span></p>
     </div>
-    <ion-badge item-right class="right-position">{{item.state_name}}</ion-badge>
+    <ion-badge color="{{item.state == 'approved' ? 'danger' : 'primary'}}" item-right class="right-position">
+      {{item.state_name}}</ion-badge>
   </div>
   <div class="comp-info">
     <div class="logo">

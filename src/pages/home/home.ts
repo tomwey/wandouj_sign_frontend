@@ -59,9 +59,9 @@ export class HomePage {
     this.loadHomeData();
 
     // console.log(new Date().getDay());
-    setTimeout(() => {
-      this.loadApplies();
-    }, 200);
+    // setTimeout(() => {
+    //   this.loadApplies();
+    // }, 200);
   }
 
   loadHomeData() {
@@ -70,6 +70,18 @@ export class HomePage {
         .then(data => {
           console.log(data);
           this.contact = data['data'];
+          if (this.contact.qd_count != 0) {
+            this.filterItems[1].value = { label: "待签到", value: "0" };
+            this.checkState = '0';
+          } else if (this.contact.qd_ed_count > this.contact.qt_ed_count) {
+            this.filterItems[1].value = { label: "待签退", value: "1" };
+            this.checkState = '1';
+          } else {
+            this.filterItems[1].value = { label: "全部", value: "-1" };
+            this.checkState = '';
+          }
+          this.loadApplies();
+
           resolve();
         })
         .catch(error => {
@@ -92,7 +104,7 @@ export class HomePage {
           let temp = [{ label: '全部', value: null }];
           let arr = data['data'];
           arr.forEach(ele => {
-            temp.push({ label: `【${ele.project_name}】${ele.name}`, value: ele.id });
+            temp.push({ label: `${ele.project_name} | ${ele.name}`, value: ele.id });
           });
           if (callback) {
             callback(temp);
