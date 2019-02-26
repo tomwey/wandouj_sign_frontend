@@ -5,13 +5,11 @@
   Ionic pages and navigation.
 -->
 
-<ion-content>
-  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="ios-arrow-round-down-outline" pullingText="下拉刷新" refreshingSpinner="circles"
-      refreshingText="正在刷新">
-    </ion-refresher-content>
-  </ion-refresher> -->
+<!-- <ion-header no-border>
 
+</ion-header> -->
+
+<ion-content>
   <div class="caption" *ngIf="!!contact">
     <div class="channel">
       <ion-item>
@@ -49,14 +47,14 @@
   <div class="applies">
     <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
     <!-- <ion-searchbar></ion-searchbar> -->
+    <div class="total-box" *ngIf="applies.length > 0">共 {{applies.length}} 人</div>
   </div>
-
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
   <div class="apply-users">
     <virtual-scroller #scroll [items]="applies" [childHeight]="180">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
-          <div item-left class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">
+          <div class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">
             <span class="custom-checkbox" [class.has-selected]="hasSelectAll || item.cb_selected" tappable
               (click)="selectItem(item);" *ngIf="checkState == '0' || checkState == '1'">
               <ion-icon

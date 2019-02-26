@@ -180,7 +180,7 @@ export class HomePage {
 
     this.users.GetApplies(date, state, merch_id, job_id)
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.applies = data['data'];
         this.error = this.applies.length === 0 ? '暂无报名人员' : null;
       })

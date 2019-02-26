@@ -52,6 +52,7 @@ page-home {
     }
 
     .apply-users {
+
         background: #fff;
         .item-ios.item-block .item-inner {
             border-bottom: 0;
@@ -62,7 +63,6 @@ page-home {
             //     border-bottom: 0;
             // }
         }
-
     }
 
     .custom-toolbar {
@@ -144,5 +144,13 @@ page-home {
 
     ion-footer {
         height: 50px;
+    }
+
+    .total-box {
+        text-align: center;
+        font-size: 14px;
+        padding: 10px;
+        color: #888;
+        background: #f2f2f2;
     }
 }

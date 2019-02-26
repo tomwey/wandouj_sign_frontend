@@ -11,20 +11,23 @@
       <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
     </div>
   </div>
-  <div class="job">
-    <p class="name">{{item.job.name}}</p>
-    <p class="project-name">{{item.job.project_name}}</p>
-  </div>
-
   <div class="apply-info">
     <div class="time-box">
-      <p class="time">报名时间: {{item.apply_time || "还未签到"}}
-      </p>
       <p class="time">工作时间: {{item.work_time_range}}</p>
       <p class="time">签到时间: {{item.checkin_time || "还未签到"}}<span *ngIf="item.is_late" class="be-late">迟到</span>
       </p>
       <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
           class="leave-early">早退</span></p>
+    </div>
+    <ion-badge item-right class="right-position">{{item.state_name}}</ion-badge>
+  </div>
+  <div class="comp-info">
+    <div class="logo">
+      <img [src]="item.job.comp_logo || 'assets/imgs/default_avatar.png'">
+    </div>
+    <div class="info">
+      <h2>{{item.job.comp_alias_name}}</h2>
+      <p>{{item.job.comp_name}}</p>
     </div>
   </div>
 </div>
