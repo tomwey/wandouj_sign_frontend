@@ -68,6 +68,22 @@ export class Users {
         });
     }
 
+    GetTodayCheckCompanies(type) {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.GET('provider/portal/today_companies', { token: token, type: type }, "加载中...", false)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+                .catch(error => { });
+            // 
+        });
+    }
+
     GetCommCompanies() {
         return new Promise((resolve, reject) => {
             this.token().then(token => {

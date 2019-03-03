@@ -22,35 +22,88 @@
     </div>
     <div class="today-stats">
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-3>
           <div class="stat">
-            <div class="value">{{contact.qd_count}}</div>
-            <div class="label">今日待签到</div>
+            <div class="value">{{contact.qd_count}}<span class="unit">人</span></div>
+            <div class="label">今日已报名</div>
           </div>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-3>
           <div class="stat">
-            <div class="value">{{contact.qd_ed_count}}</div>
+            <div class="value">{{contact.qd_ed_count}}<span class="unit">人</span></div>
             <div class="label">今日已签到</div>
           </div>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-3>
           <div class="stat">
-            <div class="value">{{contact.qt_ed_count}}</div>
+            <div class="value">{{contact.qt_ed_count}}<span class="unit">人</span></div>
             <div class="label">今日已签退</div>
           </div>
+        </ion-col>
+        <ion-col col-3 style="text-align: right;">
+          <span class="custom-btn">历史签到</span>
         </ion-col>
       </ion-row>
     </div>
   </div>
-
-  <div class="applies">
-    <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
-    <!-- <ion-searchbar></ion-searchbar> -->
-    <div class="total-box" *ngIf="applies.length > 0">共 {{applies.length}} 人</div>
+  <div class="segments-wrap">
+    <ion-segment [(ngModel)]="operType" mode="md" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="1">
+        今日签到
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        今日签退
+      </ion-segment-button>
+    </ion-segment>
   </div>
+
+  <!-- <div class="applies">
+    <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
+    <div class="total-box" *ngIf="applies.length > 0">共 {{applies.length}} 人</div>
+  </div> -->
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
-  <div class="apply-users">
+  <div class="companies">
+    <virtual-scroller #scroll [items]="companies" [childHeight]="240">
+      <ion-card *ngFor="let comp of scroll.viewPortItems" tappable (click)="openApplies(comp);">
+        <ion-item>
+          <ion-avatar item-left>
+            <img [src]="comp.logo || 'assets/imgs/default_avatar.png'">
+          </ion-avatar>
+          <h2 class="comp-alias-name">{{comp.alias_name}}</h2>
+          <p class="comp-name">{{comp.name}}</p>
+          <span item-right class="check-btn">
+            进入{{operType == '1' ? '签到' : '签退'}}
+          </span>
+        </ion-item>
+        <div class="stats">
+          <ion-row>
+            <ion-col col-4 style="text-align: left;">
+              <div class="value-box">
+                <div class="value">{{comp.approved_count}}<span class="unit">人</span></div>
+                <div class="label">已报名</div>
+              </div>
+            </ion-col>
+            <ion-col col-4 style="text-align: center;">
+              <div class="value-box">
+                <div class="value">{{comp.qd_yes_count}}<span class="unit">人</span></div>
+                <div class="label">{{operType == '1' ? '已签到' : '已签退'}}</div>
+              </div>
+            </ion-col>
+            <ion-col col-4 style="text-align: right;">
+              <div class="value-box">
+                <div class="value" [class.success]="comp.qd_no_count == 0" [class.has-left]="comp.qd_no_count != 0">
+                  {{comp.qd_no_count == 0 ? '已完成' : ('剩'+ comp.qd_no_count +'人' + '未' + (operType == '1' ? '签到' : '签退'))}}
+                </div>
+                <div class="label">{{operType == '1' ? '签到' : '签退'}}状态</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+
+      </ion-card>
+    </virtual-scroller>
+  </div>
+  <!-- <div class="apply-users">
     <virtual-scroller #scroll [items]="applies" [childHeight]="240">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
@@ -66,10 +119,10 @@
         </ion-item>
       </div>
     </virtual-scroller>
-  </div>
+  </div> -->
 
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <div class="custom-toolbar" *ngIf="(checkState == '0' || checkState == '1') && applies.length > 0">
     <ion-row>
       <ion-col col-3>
@@ -83,4 +136,4 @@
       </ion-col>
     </ion-row>
   </div>
-</ion-footer>
+</ion-footer> -->
