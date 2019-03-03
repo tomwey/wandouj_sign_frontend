@@ -71,6 +71,10 @@ export class HomePage {
     }, 200);
   }
 
+  viewHistory() {
+    this.navCtrl.push('AppliesPage');
+  }
+
   segmentChanged(ev) {
     this.loadCompanies();
   }
@@ -228,35 +232,35 @@ export class HomePage {
   //     });
   // }
 
-  checkin(item) {
-    this.users.HandleSign('checkin', item)
-      .then(data => {
-        this.tools.showToast("签到成功");
-        for (const key in item) {
-          if (item.hasOwnProperty(key)) {
-            item[key] = data['data'][key];
-          }
-        }
-      })
-      .catch(error => {
-        this.tools.showToast(error.message || "服务器超时，请重试");
-      });
-  }
+  // checkin(item) {
+  //   this.users.HandleSign('checkin', item)
+  //     .then(data => {
+  //       this.tools.showToast("签到成功");
+  //       for (const key in item) {
+  //         if (item.hasOwnProperty(key)) {
+  //           item[key] = data['data'][key];
+  //         }
+  //       }
+  //     })
+  //     .catch(error => {
+  //       this.tools.showToast(error.message || "服务器超时，请重试");
+  //     });
+  // }
 
-  checkout(item) {
-    this.users.HandleSign('checkout', item)
-      .then(data => {
-        this.tools.showToast("签退成功");
-        for (const key in item) {
-          if (item.hasOwnProperty(key)) {
-            item[key] = data['data'][key];
-          }
-        }
-      })
-      .catch(error => {
-        this.tools.showToast(error.message || "服务器超时，请重试");
-      });
-  }
+  // checkout(item) {
+  //   this.users.HandleSign('checkout', item)
+  //     .then(data => {
+  //       this.tools.showToast("签退成功");
+  //       for (const key in item) {
+  //         if (item.hasOwnProperty(key)) {
+  //           item[key] = data['data'][key];
+  //         }
+  //       }
+  //     })
+  //     .catch(error => {
+  //       this.tools.showToast(error.message || "服务器超时，请重试");
+  //     });
+  // }
 
   // selectAll() {
   //   this.hasSelectAll = !this.hasSelectAll;

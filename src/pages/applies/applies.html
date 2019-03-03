@@ -7,13 +7,48 @@
 <ion-header no-border>
 
   <ion-navbar color="primary">
-    <ion-title>近期报名</ion-title>
-    <ion-buttons end>
-      <button ion-button>全部报名</button>
-    </ion-buttons>
+    <ion-title>历史签到</ion-title>
   </ion-navbar>
+  <div class="filter-bars">
+    <filter-bars [filterItems]="filterItems" (onSelectFilterItem)="selectedFilterItem($event);"></filter-bars>
+  </div>
 </ion-header>
 
 <ion-content>
-  <recent-dates-bar [datesData]="datesData" (onSelectDate)="selectDate($event);"></recent-dates-bar>
+  <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
+  <div class="total-box" *ngIf="applies.length > 0">共 {{applies.length}} 人</div>
+  <div class="apply-users">
+    <virtual-scroller #scroll [items]="applies" [childHeight]="240">
+      <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
+        <ion-item>
+          <div class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">
+            <span class="custom-checkbox" [class.has-selected]="hasSelectAll || item.cb_selected" tappable
+              (click)="selectItem(item);" *ngIf="checkState == '0' || checkState == '1'">
+              <ion-icon
+                name="{{(hasSelectAll || item.cb_selected) ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}">
+              </ion-icon>
+            </span>
+            <apply-info [item]="item"></apply-info>
+          </div>
+        </ion-item>
+      </div>
+    </virtual-scroller>
+  </div>
+
 </ion-content>
+
+<ion-footer>
+  <div class="custom-toolbar" *ngIf="(checkState == '0' || checkState == '1') && applies.length > 0">
+    <ion-row>
+      <ion-col col-3>
+        <span class="select-all" [class.selected]="hasSelectAll" tappable (click)="selectAll();">
+          <ion-icon name="{{hasSelectAll ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}"></ion-icon>全选
+        </span>
+      </ion-col>
+      <ion-col col-9 style="text-align: right;">
+        <span class="check-btn" [class.checkin]="checkState == '0'" [class.disabled]="selectedUsers.length === 0"
+          [class.checkout]="checkState == '1'" tappable (click)="handleCheck();">{{formatCheckBtnText()}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>

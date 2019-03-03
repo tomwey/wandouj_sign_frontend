@@ -53,7 +53,7 @@ export class FilterBarsComponent {
   filterItemLabel(item) {
     if (item.isPicker) {
       if (item.value) {
-        return Utils.dateFormat(new Date()) == item.value ? "今天" : item.value;
+        return item.value;//Utils.dateFormat(new Date()) == item.value ? "今天" : item.value;
       } else {
         return item.name;
       }
