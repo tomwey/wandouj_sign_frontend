@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ModalController, Events } from 'ionic-angular';
 import { Users } from '../../provider/Users';
-import { Tools } from '../../provider/Tools';
+// import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
@@ -36,7 +36,7 @@ export class UserApplyListPage {
 
   constructor(public navCtrl: NavController,
     private users: Users,
-    private tools: Tools,
+    // private tools: Tools,
     private modalCtrl: ModalController,
     private events: Events,
     private iosFixed: iOSFixedScrollFreeze,

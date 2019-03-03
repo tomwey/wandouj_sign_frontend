@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ModalController } from 'ionic-angular';
-import { Utils } from '../../provider/Utils';
+// import { Utils } from '../../provider/Utils';
 
 /**
  * Generated class for the FilterBarsComponent component.

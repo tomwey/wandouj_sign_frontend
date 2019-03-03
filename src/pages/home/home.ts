@@ -3,7 +3,7 @@ import { /*IonicPage, */NavController, NavParams, Content, Events } from 'ionic-
 // import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
-import { Tools } from '../../provider/Tools';
+// import { Tools } from '../../provider/Tools';
 // import { jsClipboard } from '../../provider/jsClipboard';
 // import { Utils } from '../../provider/Utils';
 // import { Body } from '@angular/http/src/body';
@@ -43,7 +43,7 @@ export class HomePage {
     // private api: ApiService,
     // private app: App,
     private users: Users,
-    private tools: Tools,
+    // private tools: Tools,
     private events: Events,
     // private modalCtrl: ModalController,
     private iosFixed: iOSFixedScrollFreeze,

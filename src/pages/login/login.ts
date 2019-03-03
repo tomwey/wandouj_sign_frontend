@@ -6,7 +6,7 @@ import { Users } from '../../provider/Users';
 import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 // import { HomePage } from '../home/home';
-import { TabsPage } from '../tabs/tabs';
+// import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 // import { TabsPage } from '../tabs/tabs';
 // import { SettingPage } from '../setting/setting';
@@ -77,7 +77,7 @@ export class LoginPage {
 
     this.users.Login(mobile, code)
       .then(data => {
-        console.log(data);
+        // console.log(data);
         // this.checkProfile();
         // if (!data['pay_account']) {
         //   this.app.getRootNavs()[0].setRoot('ProfilePage', { profile: data });

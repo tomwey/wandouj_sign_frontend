@@ -21,14 +21,14 @@ import { iOSFixedScrollFreeze } from '../provider/iOSFixedScrollFreeze';
 
 import { PipesModule } from '../pipes/pipes.module';
 import { ComponentsModule } from '../components/components.module';
-import { TabsPage } from '../pages/tabs/tabs';
+// import { TabsPage } from '../pages/tabs/tabs';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    TabsPage,
+    // TabsPage,
     LoginPage
   ],
   imports: [
@@ -47,7 +47,7 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
   entryComponents: [
     MyApp,
     HomePage,
-    TabsPage,
+    // TabsPage,
     LoginPage,
   ],
   providers: [
