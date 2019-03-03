@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Content, Events, ModalController } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Content, Events } from 'ionic-angular';
 // import { ApiService } from '../../provider/api-service';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 import { Users } from '../../provider/Users';
@@ -50,6 +50,10 @@ export class HomePage {
     public navParams: NavParams) {
     this.events.subscribe("reloadprofile", () => {
       this.loadHomeData();
+    });
+    this.events.subscribe("reloaddata", () => {
+      this.loadHomeData();
+      this.loadCompanies();
     });
   }
 

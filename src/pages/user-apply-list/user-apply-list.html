@@ -20,7 +20,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="empty-error-log" *ngIf="!!error">{{error}}</div>
+  <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
   <div class="applies">
     <virtual-scroller #scroll [items]="userList" [childHeight]="80">
       <ion-item *ngFor="let item of scroll.viewPortItems" [class.has-selected]="hasSelectAll || item.cb_selected"

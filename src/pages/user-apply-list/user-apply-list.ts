@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, ModalController, Events } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { Tools } from '../../provider/Tools';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
@@ -37,6 +37,8 @@ export class UserApplyListPage {
   constructor(public navCtrl: NavController,
     private users: Users,
     private tools: Tools,
+    private modalCtrl: ModalController,
+    private events: Events,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
     this.comp_id = this.navParams.data.comp_id;
@@ -125,14 +127,29 @@ export class UserApplyListPage {
   }
 
   handleCheck() {
+    if (this.selectedUsers.length === 0) return;
 
+    let modal = this.modalCtrl.create('ApplyBatchCheckPage', {
+      state: this.operType == '1' ? '0' : '1',
+      users: this.selectedUsers
+    });
+    modal.onDidDismiss((data) => {
+      if (data) {
+        this.loadUsersForJob(this.currentJobID, this.operType);
+        this.events.publish('reloaddata');
+      }
+    });
+    modal.present();
   }
 
   loadUsersForJob(job_id, type, showLoading = true) {
+    this.selectedUsers = [];
+    this.hasSelectAll = false;
+
     this.users.GetUsersForJob(this.comp_id, job_id, type, showLoading)
       .then(data => {
         this.userList = data['data'];
-        console.log(this.userList);
+        // console.log(this.userList);
         this.error = this.userList.length === 0 ? '暂无数据' : null;
       })
       .catch(error => {
