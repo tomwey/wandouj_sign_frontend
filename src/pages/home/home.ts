@@ -110,7 +110,8 @@ export class HomePage {
   }
 
   openApplies(comp) {
-    console.log(comp);
+    // console.log(comp);
+    this.navCtrl.push('UserApplyListPage', { comp_id: comp.id, type: this.operType });
   }
 
   // selectFilterItem(item, callback) {

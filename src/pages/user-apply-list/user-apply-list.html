@@ -1,0 +1,59 @@
+<!--
+  Generated template for the UserApplyListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-navbar color="primary">
+    <ion-title>{{operType == '1' ? '签到名单' : '签退名单'}}</ion-title>
+  </ion-navbar>
+
+  <div class="jobs-bar" *ngIf="jobs.length > 0">
+    <div class="job-item" *ngFor="let job of jobs" tappable (click)="selectJob(job);"
+      [class.selected]="job.id === currentJobID">
+      {{job.name}}<br>
+      {{job.work_times}}
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="empty-error-log" *ngIf="!!error">{{error}}</div>
+  <div class="applies">
+    <virtual-scroller #scroll [items]="userList" [childHeight]="80">
+      <ion-item *ngFor="let item of scroll.viewPortItems" [class.has-selected]="hasSelectAll || item.cb_selected"
+        class="user-item" tappable (click)="selectItem(item);">
+        <ion-icon item-left
+          name="{{(hasSelectAll || item.cb_selected) ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}">
+        </ion-icon>
+        <div class="main-info"><span class="name">{{item.user.name}}</span>
+          <span class="mobile">{{item.user.mobile}}</span>
+          <span class="idcard" *ngIf="!!item.user.idcard">{{item.user.idcard}}</span></div>
+        <div class="other">
+          <ion-badge>{{item.user.sex}}</ion-badge>
+          <ion-badge>{{item.user.age}}岁</ion-badge>
+          <ion-badge *ngIf="!!item.user.college">{{item.user.college}}</ion-badge>
+          <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
+        </div>
+      </ion-item>
+    </virtual-scroller>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="custom-toolbar" *ngIf="userList.length > 0">
+    <ion-row>
+      <ion-col col-3>
+        <span class="select-all" [class.selected]="hasSelectAll" tappable (click)="selectAll();">
+          <ion-icon name="{{hasSelectAll ? 'md-checkmark-circle' : 'ios-radio-button-off-outline'}}"></ion-icon>全选
+        </span>
+      </ion-col>
+      <ion-col col-9 style="text-align: right;">
+        <span class="check-btn" [class.disabled]="selectedUsers.length === 0" tappable
+          (click)="handleCheck();">{{formatCheckBtnText()}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>
