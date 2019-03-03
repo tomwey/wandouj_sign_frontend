@@ -104,7 +104,7 @@ export class HomePage {
           let temp = [{ label: '全部', value: null }];
           let arr = data['data'];
           arr.forEach(ele => {
-            temp.push({ label: `${ele.project_name} | ${ele.name}`, value: ele.id });
+            temp.push({ label: `「${ele.project_name}」${ele.name}`, value: ele.id });
           });
           if (callback) {
             callback(temp);
@@ -160,7 +160,7 @@ export class HomePage {
   }
 
   selectedFilterItem(item) {
-    console.log(item);
+    // console.log(item);
     this.showOrHideToolbars();
 
     this.loadApplies();

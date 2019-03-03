@@ -51,7 +51,7 @@
   </div>
   <div class="empty-error-box" *ngIf="!!error">{{error}}</div>
   <div class="apply-users">
-    <virtual-scroller #scroll [items]="applies" [childHeight]="180">
+    <virtual-scroller #scroll [items]="applies" [childHeight]="240">
       <div class="apply-user" *ngFor="let item of scroll.viewPortItems">
         <ion-item>
           <div class="main-content" [class.has-checkbox]="checkState == '0' || checkState == '1'">

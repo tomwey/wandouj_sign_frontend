@@ -11,6 +11,9 @@
       <ion-badge *ngIf="!!item.user.specialty">{{item.user.specialty}}</ion-badge>
     </div>
   </div>
+  <div class="job">
+    <p text-wrap>「{{item.job.project_name}}」{{item.job.name}}</p>
+  </div>
   <div class="apply-info">
     <div class="time-box">
       <p class="time">工作时间: {{item.work_time_range}}</p>
@@ -18,6 +21,7 @@
       </p>
       <p class="time">签退时间: {{item.checkout_time || "还未签退"}}<span *ngIf="item.is_leave_early"
           class="leave-early">早退</span></p>
+      <p class="time">工作时长: {{item.work_length}}</p>
     </div>
     <ion-badge color="{{item.state == 'approved' ? 'danger' : 'primary'}}" item-right class="right-position">
       {{item.state_name}}</ion-badge>
